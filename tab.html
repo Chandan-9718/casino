@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .tab-container {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        
+      }
+      .box {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        max-width: 500px;
+        width: 100%;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 10px;
+      }
+      input {
+        width: 100%;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+      }
+      button {
+        padding: 5px 10px;
+        font-size: 14px;
+        color: #fff;
+        border-radius: 8px;
+        background-color: blue;
+        cursor: pointer;
+        min-width: 80px;
+      }
+      .input-box,
+      .output-box {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="tab-container">
+        <div class="tab-block">
+          <button class="tab">tab-1</button>
+          <button class="tab">tab-2</button>
+          <button class="tab">tab-3</button>
+          <button class="tab">tab-4</button>
+          <button class="tab">tab-5</button>
+          <button class="tab">tab-6</button>
+          <button class="tab">tab-7</button>
+        </div>
+        <div class="tab-content">
+          <p class="para">
+            TAB=01 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quas, odio!
+          </p>
+          <p class="para">
+            TAB=02 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quas, odio!
+          </p>
+          <p class="para">
+            TAB=03 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quas, odio!
+          </p>
+          <p class="para">
+            TAB=04 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quas, odio!
+          </p>
+          <p class="para">
+            TAB=05 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quas, odio!
+          </p>
+          <p class="para">
+            TAB=06 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quas, odio!
+          </p>
+          <p class="para">
+            TAB=07 Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            Quas, odio!
+          </p>
+        </div>
+      </div>
+      <div class="box">
+        <div class="input-box">
+          <input type="text" id="input" placeholder="Enter your task" />
+          <button id="add">add</button>
+        </div>
+      </div>
+    </div>
+    <script>
+      let tabs = document.querySelectorAll(".tab");
+      let text = document.querySelectorAll(".para");
+      text.forEach((currP) => {
+        currP.style.display = "none";
+      });
+      tabs.forEach((tab, index) => {
+        tab.addEventListener("click", () => {
+          text.forEach((curr) => {
+            curr.style.display = " none";
+          });
+          text[index].style.display = "block";
+        });
+      });
+
+      let inputVal = document.getElementById("input");
+      let addBtn = document.getElementById("add");
+      let mainBox = document.querySelector(".box");
+
+      let EditCount = [];
+
+      addBtn.addEventListener("click", () => {
+        if (inputVal.value === "") return;
+
+        let innerBox = document.createElement("div");
+        innerBox.classList.add("output-box");
+        let span = document.createElement("span");
+        span.textContent = inputVal.value;
+        let EditBtn = document.createElement("button");
+        EditBtn.textContent = "Edit";
+        let DetBtn = document.createElement("button");
+        DetBtn.textContent = "Delete";
+
+        mainBox.appendChild(innerBox);
+        innerBox.appendChild(span);
+        innerBox.appendChild(EditBtn);
+        innerBox.appendChild(DetBtn);
+
+        DetBtn.addEventListener('click' , () => {
+          innerBox.remove();
+        });
+        EditBtn.addEventListener('click', () => {
+          inputVal.value = span.textContent;
+          addBtn.textContent = "Update"
+        });
+        inputVal.value = "";
+      });
+    </script>
+  </body>
+</html>
